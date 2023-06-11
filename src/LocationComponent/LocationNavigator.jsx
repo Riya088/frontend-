@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 const LocationNavigator = (location) => {
   console.log(location);
   return (
+    <div >
     <Link
       to={`/home/hotel/location/${location.item.id}/${location.item.city}`}
       style={{
@@ -15,6 +16,7 @@ const LocationNavigator = (location) => {
         <i>{location.item.city}</i>
       </b>
     </Link>
+   </div>
   );
 };
 

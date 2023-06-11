@@ -18,18 +18,37 @@ const UserRegister = () => {
     sex: "",
   });
 
-  if (document.URL.indexOf("admin") != -1) {
+  if (document.URL.indexOf("admin") !== -1) {
     user.role = "Admin";
-  } else if (document.URL.indexOf("hotel") != -1) {
+  } else if (document.URL.indexOf("hotel") !== -1) {
     user.role = "Hotel";
-  } else if (document.URL.indexOf("customer") != -1) {
+  } else if (document.URL.indexOf("manager") !== -1) {
+    user.role = "Manager";
+  } else if (document.URL.indexOf("customer") !== -1) {
     user.role = "Customer";
   }
 
-  console.log("ROLE FECTHED : " + user.role);
+  console.log("ROLE FETCHED: " + user.role);
 
   const handleUserInput = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    let inputValue = value;
+
+    if (name === "firstName" || name === "lastName") {
+      inputValue = value.replace(/[^a-zA-Z]/g, "").slice(0, 50); // Remove non-alphabetic characters and limit length
+    } else if (name === "contact") {
+      const contactPattern = /^\d{0,10}$/; // Regular expression for contact validation
+
+      if (!contactPattern.test(value)) {
+        // Invalid contact format
+        return;
+      }
+    }
+
+    setUser((prevState) => ({
+      ...prevState,
+      [name]: inputValue,
+    }));
   };
 
   const [genders, setGenders] = useState([]);
@@ -82,12 +101,13 @@ const UserRegister = () => {
   };
 
   return (
-    <div>
+    <div className="margin">
       <div className="mt-2 d-flex aligns-items-center justify-content-center ms-2 me-2 mb-2">
         <div
           className="card form-card border-color text-color custom-bg"
-          style={{ width: "50rem" }}
+          style={{ width: "50rem", height: "860px"}}
         >
+          
           <div className="card-header bg-color custom-bg-text text-center">
             <h5 className="card-title">Register {user.role}</h5>
           </div>
@@ -95,7 +115,9 @@ const UserRegister = () => {
             <form className="row g-3" onSubmit={saveUser}>
               <div className="col-md-6 mb-3 text-color">
                 <label htmlFor="title" className="form-label">
-                  <b> First Name</b>
+                  <b>
+                    First Name<span className="text-danger">*</span>
+                  </b>
                 </label>
                 <input
                   type="text"
@@ -104,11 +126,14 @@ const UserRegister = () => {
                   name="firstName"
                   onChange={handleUserInput}
                   value={user.firstName}
+                  required
                 />
               </div>
               <div className="col-md-6 mb-3 text-color">
                 <label htmlFor="description" className="form-label">
-                  <b>Last Name</b>
+                  <b>
+                    Last Name<span className="text-danger">*</span>
+                  </b>
                 </label>
                 <input
                   type="text"
@@ -117,12 +142,15 @@ const UserRegister = () => {
                   name="lastName"
                   onChange={handleUserInput}
                   value={user.lastName}
+                  required
                 />
               </div>
 
               <div className="col-md-6 mb-3 text-color">
                 <b>
-                  <label className="form-label">Email Id</label>
+                  <label className="form-label">
+                    Email Id<span className="text-danger">*</span>
+                  </label>
                 </b>
                 <input
                   type="email"
@@ -131,12 +159,13 @@ const UserRegister = () => {
                   name="emailId"
                   onChange={handleUserInput}
                   value={user.emailId}
+                  required
                 />
               </div>
 
               <div className="col-md-6 mb-3">
-                <label htmlFor="quantity" className="form-label">
-                  <b>Password</b>
+                <label htmlFor="password" className="form-label">
+                  <b>Password<span className="text-danger">*</span></b>
                 </label>
                 <input
                   type="password"
@@ -145,6 +174,7 @@ const UserRegister = () => {
                   name="password"
                   onChange={handleUserInput}
                   value={user.password}
+                  required
                 />
               </div>
 
@@ -158,25 +188,29 @@ const UserRegister = () => {
                   name="sex"
                 >
                   <option value="0">Select Gender</option>
-                  <option value="1">Female</option>
-                  <option value="2">Male</option>
-                  {genders.map((gender) => {
-                    return <option value={gender}> {gender} </option>;
-                  })}
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Other">Other</option>
+                 
                 </select>
               </div>
 
               <div className="col-md-6 mb-3">
                 <label htmlFor="contact" className="form-label">
-                  <b>Contact No</b>
+                  <b>
+                    Contact No<span className="text-danger">*</span>
+                  </b>
                 </label>
                 <input
-                  type="number"
+                  type="tel"
                   className="form-control"
                   id="contact"
                   name="contact"
                   onChange={handleUserInput}
                   value={user.contact}
+                  pattern="[0-9]{10}"
+                  title="Contact number must be 10 digits"
+                  required
                 />
               </div>
 
@@ -210,7 +244,9 @@ const UserRegister = () => {
 
               <div className="col-md-6 mb-3">
                 <label htmlFor="price" className="form-label">
-                  <b>City</b>
+                  <b>
+                    City<span className="text-danger">*</span>
+                  </b>
                 </label>
                 <input
                   type="text"
@@ -219,12 +255,15 @@ const UserRegister = () => {
                   name="city"
                   onChange={handleUserInput}
                   value={user.city}
+                  required
                 />
               </div>
 
               <div className="col-md-6 mb-3">
                 <label htmlFor="pincode" className="form-label">
-                  <b>Pincode</b>
+                  <b>
+                    Pincode<span className="text-danger">*</span>
+                  </b>
                 </label>
                 <input
                   type="number"
@@ -233,9 +272,18 @@ const UserRegister = () => {
                   name="pincode"
                   onChange={handleUserInput}
                   value={user.pincode}
+                  required
                 />
               </div>
-
+              <br>
+                </br>
+                <br>
+                </br>
+                <br></br> <br>
+                </br>
+                <br>
+                </br>
+                <br></br>
               <div className="d-flex aligns-items-center justify-content-center">
                 <input
                   type="submit"

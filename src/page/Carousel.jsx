@@ -1,65 +1,50 @@
-import carousel1 from "../images/carousal_1.png";
-import carousel2 from "../images/carousal_2.png";
-import carousel3 from "../images/carousal_3.png";
+import React, { useState, useEffect } from 'react';
+import carousel1 from '../images/carousel/1.png';
+import carousel2 from '../images/carousel/2.png';
+import carousel3 from '../images/carousel/3.png';
+import carousel4 from '../images/carousel/4.png';
+import carousel5 from '../images/carousel/5.png';
+import carousel6 from '../images/carousel/6.png';
 
 const Carousel = () => {
+  const [currentImg, setCurrentImg] = useState(0);
+  const imgs = [carousel1, carousel2, carousel3, carousel4, carousel5, carousel6];
+  const interval = 500;
+
+  useEffect(() => {
+    const timer = setInterval(changeSlide, interval);
+    return () => clearInterval(timer);
+  }, []);
+
+  function changeSlide() {
+    setCurrentImg((currentImg + 1) % imgs.length);
+  }
+
   return (
-    <div
-      id="carouselExampleCaptions"
-      className="carousel slide"
-      data-bs-ride="false"
-    >
-      <div className="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="0"
-          className="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
+    <div className='margin'>
+      <div className="slider">
+        {imgs.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            className={`d-block w-100 ${currentImg === index ? 'active' : ''}`}
+            alt="..."
+            style={{ transform: `translateX(${(index - currentImg) * 100}%)`
+            
+           }}
+          />
+        ))}
       </div>
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img src={carousel3} className="d-block w-100" alt="..." />
-        </div>
-        <div className="carousel-item">
-          <img src={carousel3} className="d-block w-100" alt="..." />
-        </div>
-        <div className="carousel-item">
-          <img src={carousel3} className="d-block w-100" alt="..." />
-        </div>
+
+      <div className="navigation-button">
+        {imgs.map((_, index) => (
+          <span
+            key={index}
+            className={`dot ${currentImg === index ? 'active' : ''}`}
+            onClick={() => setCurrentImg(index)}
+          ></span>
+        ))}
       </div>
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
     </div>
   );
 };

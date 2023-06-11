@@ -44,14 +44,22 @@ const AdminHeader = () => {
           <b className="text-color">Add Facility</b>
         </Link>
       </li>
-
       <li className="nav-item">
         <Link
           to="/user/hotel/register"
           className="nav-link active"
           aria-current="page"
         >
-          <b className="text-color">Register Hotel User</b>
+          <b className="text-color">Register Hotel Manager</b>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link
+          to="/user/hotel/register"
+          className="nav-link active"
+          aria-current="page"
+        >
+          <b className="text-color">Register Hotel Receptionist</b>
         </Link>
       </li>
 
@@ -77,7 +85,7 @@ const AdminHeader = () => {
 
       <li class="nav-item">
         <Link
-          to=""
+          to="/home"
           class="nav-link active"
           aria-current="page"
           onClick={adminLogout}

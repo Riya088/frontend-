@@ -1,6 +1,7 @@
 const HotelCarousel = (hotel) => {
   console.log(hotel);
   return (
+    <div >
     <div
       id="carouselExampleCaptions2"
       className="carousel slide"
@@ -69,6 +70,7 @@ const HotelCarousel = (hotel) => {
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
       </button>
+    </div>
     </div>
   );
 };

@@ -24,6 +24,7 @@ const GetAllFacility = () => {
   }, []);
 
   return (
+    <div >
     <div class="list-group form-card border-color">
       <Link
         to="#"
@@ -42,6 +43,7 @@ const GetAllFacility = () => {
           </Link>
         );
       })}
+    </div>
     </div>
   );
 };

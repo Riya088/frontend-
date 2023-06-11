@@ -1,6 +1,104 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+@import url('https://fonts.googleapis.com/css?family=Bangers|Cinzel:400,700,900|Lato:100,300,400,700,900|Lobster|Lora:400,700|Mansalva|Muli:200,300,400,600,700,800,900|Open+Sans:300,400,600,700,800|Oswald:200,300,400,500,600,700|Roboto:100,300,400,500,700,900&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+}
+body{
+  font-size:17px;
+  color:#070707;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #ffffff;
+  background-image: url("https://www.transparenttextures.com/patterns/clean-gray-paper.png");
+}
+h1, h2, h3, h4, h5, h6, p{
+  margin:0px;
+  padding:0px;
+}
+
+.logo-container ul li {
+    width: 300px;
+    height: 40px;
+    background: #fff;
+   
+    margin: 10px;
+    float: left;
+    padding:20px;
+       
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo-container ul li a{
+  text-decoration:none !important;
+  display: inline-block;
+}
+.logo-holder{
+  text-align:center;
+}
+.logo-6 h3 {
+  color: #030507;
+  font-family: 'Cinzel', serif;
+  font-weight: 300;
+  font-size: 30px;
+  line-height:1.3;
+}
+.logo-6 h3 span {
+  background: #0b0b17;
+  color: #fff;
+  display: inline-block;
+  line-height: 1.8;
+  padding: 0 16px;
+} 
+.slider {
+  width: 100%;
+  height: 510px;
+  position: relative;
+}
+
+.slider img {
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* transition: all 0.5s ease-in-out; */
+}
+
+.slider img:first-child {
+  z-index: 1;
+}
+
+.slider img:nth-child(2) {
+  z-index: 0;
+}
+
+.navigation-button {
+  text-align: center;
+  position: relative;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.aactive,
+.dot :hover {
+  background-color: #faf8f8;
+}
+nav{
+  background-color:rgb(224, 211, 25);
+}
+  body{
+  margin: 0px;
+  padding:0px;
+  font-family: 'Merienda' cursive,'Poppins', sans-serif,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -8,39 +106,101 @@ body {
   
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: normal;
+  color: #212529;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f8f9fa;
+}
+
+.HeaderApp{
+  margin:0px;
+  background-color: rgb(240, 240, 10);
+}
+.carousel slide{
+  margin: 0px;
+  background-color: rgb(224, 239, 11);
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .custom-bg {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 } 
 
 .text-color {
-  color:#12123D;
+  color:#0d0d0b;
 }
 
 .text-color1 {
-  color:#D4AA00;
+  color:#090907;
 }
-
+.normal{
+  margin-right: 0;
+  background-color: #ffffff;
+}
 .border-color {
-  border-color: #D4AA00;
+  border-color: #070c0c;
 }
-
+.margin{
+  margin-top: 78px;
+}
 .custom-bg-text {
-  color:#12123D;
+  color:#f0f0f6;
 }
 
 .bg-color {
-  background-color: #6cc9c4;
+  color:#f0f0f6;
+  background-color: #090805;
 }
-
+.col-md-9 col-lg-7 col-xl-5{
+  color:#f0f0f6;
+}
 .rounded-card {
   padding: 1.5em .5em .5em;
   border-radius: 2em;
-  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  box-shadow: 0 5px 10px rgba(161, 51, 51, 0.2);
 }
 
 .form-card {
@@ -57,5 +217,9 @@ code {
   transform: scale(1.02);
 }
 .Footer{
- background-color: #6cc9c4;
+  
+ background-color: rgb(251, 251, 250) ;
+}
+.container-fluid mb-2{
+  margin:0px;
 }

@@ -10,15 +10,25 @@ import GetHotelFacilities from "../FacilityComponent/GetHotelFacilities";
 import GetHotelReviews from "../HotelReviewComponent/GetHotelReviews";
 import { useNavigate } from "react-router-dom";
 import Footer from "../page/Footer";
-
+import { Link } from "react-router-dom";
 const Hotel = () => {
+  const [showSecondButton, setShowSecondButton] = useState(false);
+
+  const handleButtonClick = (event) => {
+    if (event.target.type === 'submit' ) {
+      // Execute logic for submit button click
+      setShowSecondButton(true);
+    }
+  
+  };
+  const today = new Date().toISOString().split('T')[0];
   const { hotelId, locationId } = useParams();
 
   let user = JSON.parse(sessionStorage.getItem("active-customer"));
   let admin = JSON.parse(sessionStorage.getItem("active-admin"));
 
   const [quantity, setQuantity] = useState("");
-
+  const [totalDay, setTotalRoom] = useState("");
   const [hotels, setHotels] = useState([]);
 
   let navigate = useNavigate();
@@ -50,6 +60,8 @@ const Hotel = () => {
     totalRoom: "",
     totalDay: "",
   });
+
+  // hotel.totalRoom = hotel.totalRoom-booking.totalRoom;
 
   const handleBookingInput = (e) => {
     setBooking({ ...booking, [e.target.name]: e.target.value });
@@ -126,41 +138,84 @@ const Hotel = () => {
   };
 
   const bookHotel = (e) => {
+    e.preventDefault();
+
     if (user == null) {
       alert("Please login to book the hotels!!!");
-      e.preventDefault();
-    } else {
+    }
+
       const formData = new FormData();
       formData.append("userId", user.id);
       formData.append("hotelId", hotelId);
       formData.append("checkIn", booking.checkIn);
       formData.append("checkOut", booking.checkOut);
       formData.append("totalRoom", booking.totalRoom);
-      formData.append("totalDay", booking.totalDay);
-
+      formData.append("totalDay", booking.totalDay || totalDay);
       console.log(formData);
 
-      axios
-        .post("http://localhost:8080/api/book/hotel/", formData)
-        .then((result) => {
-          result.json().then((res) => {
-            console.log(res);
-            console.log(res.responseMessage);
-            alert("Hotel Booked Successfully!!!");
-          });
-        });
+      axios.post("http://localhost:8080/api/book/hotel/", formData)
+  .then((response) => {
+    console.log(response.data);
+    console.log(response.data.responseMessage);
+    toast.success("Hotel Booked Successfully!!!");
+    
+  })
+  .catch((error) => {
+    console.error(error);
+    alert("An error occurred while booking the hotel. Please try again later.");
+  });
+  };
+
+  const [value, setValue] = useState(1);
+  const min = 1;
+  const max = 10;
+
+  const handleDecrease = () => {
+    if (value > min) {
+      setValue(value - 1);
     }
+  };
+
+  const handleIncrease = () => {
+    if (value < max) {
+      setValue(value + 1);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    let inputValue = parseInt(event.target.value);
+
+    if (!isNaN(inputValue)) {
+      if (inputValue < min) {
+        inputValue = min;
+      } else if (inputValue > max) {
+        inputValue = max;
+      }
+    } else {
+      inputValue = min;
+    }
+
+    setValue(inputValue);
+  };
+
+  const calculateTotalRoom = () => {
+    // Calculate the difference between check-in and check-out dates
+    const startDate = new Date(booking.checkIn);
+    const endDate = new Date(booking.checkOut);
+    const timeDifference = Math.abs(endDate - startDate);
+    const diffDays = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+    // Set the calculated total room value
+    setTotalRoom(diffDays);
   };
 
   const navigateToAddHotelFacility = () => {
     navigate("/hotel/" + hotelId + "/add/facility");
   };
-
-  const navigateToAddReviewPage = () => {
-    navigate("/hotel/" + hotelId + "/location/" + locationId + "/add/review");
-  };
-
+  
+  
   return (
+    <div className="margin">
     <div className="container-fluid mb-5">
       <div class="row">
         <div class="col-sm-3 mt-2">
@@ -196,10 +251,6 @@ const Hotel = () => {
                     <h4>Price : &#8377;{hotel.pricePerDay}</h4>
                   </span>
                 </p>
-
-                <p class="text-color">
-                  <b>Total Room : {hotel.totalRoom}</b>
-                </p>
               </div>
 
               <div>
@@ -213,6 +264,7 @@ const Hotel = () => {
                       name="checkIn"
                       onChange={handleBookingInput}
                       value={booking.checkIn}
+                      min={today}
                       required
                     />
                   </div>
@@ -225,6 +277,8 @@ const Hotel = () => {
                       name="checkOut"
                       onChange={handleBookingInput}
                       value={booking.checkOut}
+                      min={booking.checkIn}
+                      // disabled={booking.checkIn}
                       required
                     />
                   </div>
@@ -240,27 +294,159 @@ const Hotel = () => {
                       required
                     />
                   </div>
+                  <div className="container py-4">
+                    <div className="row ">
+                      <p className="text-left font-weight-light"> Room</p>
+                      <div className="col-sm-3 ">
+                        <div className="input-group">
+                          <span className="input-group-prepend">
+                            <button
+                              type="button"
+                              className="btn btn-outline-secondary btn-number"
+                              onClick={handleDecrease}
+                              disabled={value <= min}
+                            >
+                              <span className="fa fa-minus"></span>
+                            </button>
+                          </span>
+                          <input
+                            type="text"
+                            name="quant[1]"
+                            className="form-control input-number"
+                            value={booking.totalRoom}
+                            onChange={handleInputChange}
+                            min={min}
+                            max={max}
+                            required
+                          />
+                          <span className="input-group-append">
+                            <button
+                              type="button"
+                              className="btn btn-outline-secondary btn-number"
+                              onClick={handleIncrease}
+                              disabled={value >= max}
+                            >
+                              <span className="fa fa-plus"></span>
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <br></br>
+                    <p className="text-left font-weight-light">Adult</p>
+
+                    <div className="col-sm-3 ">
+                      <div className="input-group">
+                        <span className="input-group-prepend">
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary btn-number"
+                            onClick={handleDecrease}
+                            disabled={value <= min}
+                          >
+                            <span className="fa fa-minus"></span>
+                          </button>
+                        </span>
+                        <input
+                          type="text"
+                          name="quant[1]"
+                          className="form-control input-number"
+                          value={booking.totalRoom * 2}
+                          onChange={handleInputChange}
+                          min={min}
+                          max={max}
+                          required
+                        />
+                        <span className="input-group-append">
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary btn-number"
+                            onClick={handleIncrease}
+                            disabled={value >= max}
+                          >
+                            <span className="fa fa-plus"></span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                    <br></br>
+                    <p className="text-left font-weight-light">Children</p>
+
+                    <div className="col-sm-3 ">
+                      <div className="input-group">
+                        <span className="input-group-prepend">
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary btn-number"
+                            onClick={handleDecrease}
+                            disabled={value <= min}
+                          >
+                            <span className="fa fa-minus"></span>
+                          </button>
+                        </span>
+                        <input
+                          type="text"
+                          name="quant[1]"
+                          className="form-control input-number"
+                          value={booking.totalRoom * 2}
+                          onChange={handleInputChange}
+                          min={min}
+                          max={max}
+                          required
+                        />
+                        <span className="input-group-append">
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary btn-number"
+                            onClick={handleIncrease}
+                            disabled={value >= max}
+                          >
+                            <span className="fa fa-plus"></span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                
                   <div class="col-auto">
-                    <label for="totalDay">Total Days</label>
+                    <label for="totalDay">
+                      <p onClick={calculateTotalRoom}>Total Days </p>
+                    </label>
                     <input
                       type="number"
                       class="form-control"
                       id="totalDay"
                       name="totalDay"
                       onChange={handleBookingInput}
-                      value={booking.totalDay}
+                      value={booking.totalDay || totalDay}
                       required
                     />
                   </div>
 
                   <div className="d-flex justify-content-center">
-                    <div>
-                      <input
-                        type="submit"
-                        class="btn custom-bg bg-color mb-3"
-                        value="Book Hotel"
-                      />
-                    </div>
+                    
+                      
+                        <b>
+                          <button
+                            type="submit"
+                            class="btn custom-bg bg-color mb-3"
+                          
+                           onClick={handleButtonClick}
+                            value="Book now"
+                          >Book now</button>
+                          <br></br>
+                          
+                          {showSecondButton && <button> <div style={{ textAlign: "left" }}>
+                     <Link
+                          to={`/hotel/3/location/1/viewpage/booking/${booking.id}`}
+                          className="nav-link active btn btn-sm"
+                          aria-current="page"
+                          >
+                      <b className="text-color">Continue</b>
+                      </Link>
+                    </div></button>}
+                        </b>
+                     
                   </div>
                 </form>
               </div>
@@ -269,28 +455,13 @@ const Hotel = () => {
                 if (admin) {
                   console.log(admin);
                   return (
-                    <div>
+                    <div >
                       <input
                         type="submit"
-                        className="btn custom-bg bg-color mb-3"
+                        className="
+                        btn custom-bg bg-color mb-3"
                         value="Add Facilities"
                         onClick={navigateToAddHotelFacility}
-                      />
-                    </div>
-                  );
-                }
-              })()}
-
-              {(() => {
-                if (user) {
-                  console.log(user);
-                  return (
-                    <div>
-                      <input
-                        type="submit"
-                        className="btn custom-bg bg-color mb-3"
-                        value="Add Review"
-                        onClick={navigateToAddReviewPage}
                       />
                     </div>
                   );
@@ -321,6 +492,7 @@ const Hotel = () => {
       <br />
       <hr />
       <Footer />
+    </div>
     </div>
   );
 };

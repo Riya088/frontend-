@@ -1,174 +1,35 @@
-import { Link } from "react-router-dom";
+import React from 'react';
+
 const Footer = () => {
   return (
-    <div>
-      <div class="container my-5">
-        <footer class="text-center text-lg-start text-color">
-          <div class="container-fluid p-4 pb-0">
-            {/* <section class="">
-              <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-                  <h5 class="text-uppercase text-color">
-                    Hotel Booking System
-                  </h5>
-
-                  <p>
-                    Being a 24/7 Hotel is one of our best amenities because we
-                    can offer our customer unrestricted freedom of access from
-                    sun up to sun down and everywhere in between. You no longer
-                    have to worry about anything in Hotel at any time!
-                  </p>
-                </div>
-
-                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                  <h5 class="text-uppercase text-color-4">About us</h5>
-
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 1
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 3
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 4
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                  <h5 class="text-uppercase text-color-4">Contact us</h5>
-
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 1
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 3
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 4
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                  <h5 class="text-uppercase text-color-4">Careers</h5>
-
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 1
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 3
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 4
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                  <h5 class="text-uppercase text-color-4">Links</h5>
-
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 1
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 3
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#!" class="text-color">
-                        Link 4
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </section> */}
-
-            <hr class="mb-4" />
-
-            <section class="">
-              <p class="d-flex justify-content-center align-items-center">
-                <span class="me-3 text-color">Register for free</span>
-                <Link to="/user/customer/register" class="active">
-                  <button
-                    type="button"
-                    class="btn btn-outline-light btn-rounded bg-color text-color"
-                  >
-                    Sign up!
-                  </button>
-                </Link>
-              </p>
-            </section>
-
-            <hr class="mb-4" />
-          </div>
-
-         <div className="Footer">
-          <div class="text-center">
-           <h5> © 2023 :  Made with ❤️ by Team member
-                               <br></br>
-                                    Muskan Verma
-                                    <br></br>
-                                    Divya patil
-                                    <br></br>
-                                    Abhijeet kumar
-                                    <br></br>
-                                    Chirag Lawani
-                                    <br></br>
-                                    Priyanka Sharma
-                                    <br></br>
-                                    Riya Sachan
-          </h5>
-          </div>
-          </div>
-        </footer>
+    <div className="container-fluid bg-white mt-5">
+      <div className="row">
+        <div className="col-lg-4 p-4">
+          <h3 className="h-font fw-bold fs-3 mb-2">Royal HOTELS</h3>
+          <p>
+          At Hotel Management Code, our mission is to provide efficient and reliable software solutions for hotel management. We strive to simplify hotel operations, enhance guest experiences, and optimize overall efficiency.
+          </p>
+        </div>
+        <div className="col-lg-4 p-4">
+          <h5 className="mb-3">Link</h5>
+          <a href="#" className="d-inline-block mb-2 text-dark text-decoration-none">Home</a><br/>
+          <a href="#" className="d-inline-block mb-2 text-dark text-decoration-none">About</a><br/>
+          <a href="#" className="d-inline-block mb-2 text-dark text-decoration-none">Contact Us</a>
+        </div>
+        <div className="col-lg-4 p-4">
+          <h5 className="mb-3">Follow us</h5>
+          <a href="#" className="d-inline-block text-dark text-decoration-none mb-2">
+          <i class="fa fa-twitter" aria-hidden="true"></i>Twitter
+          </a><br/>
+          <a href="#" className="d-inline-block text-dark text-decoration-none mb-2">
+            <i className="bi bi-facebook me-1"></i>Facebook
+          </a><br/>
+          <a href="#" className="d-inline-block text-dark text-decoration-none">
+            <i className="bi bi-instagram me-1"></i>Instagram
+          </a><br/>
+        </div>
       </div>
+      <h6 className="text-center bg-dark text-white p-3 m-0">Design and Developed by ROYAL HOTEL DEVELOPERS</h6>
     </div>
   );
 };

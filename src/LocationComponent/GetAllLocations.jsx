@@ -24,6 +24,7 @@ const GetAllLocations = () => {
   }, []);
 
   return (
+    <div >
     <div class="list-group form-card border-color">
       <Link
         to="/home/all/hotel/location"
@@ -42,6 +43,7 @@ const GetAllLocations = () => {
           </Link>
         );
       })}
+    </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const AddHotelForm = () => {
   const [locations, setLocations] = useState([]);
   const [hotelUsers, setHotelUsers] = useState([]);
@@ -59,7 +60,13 @@ const AddHotelForm = () => {
 
   const handleInput = (e) => {
     setHotel({ ...hotel, [e.target.name]: e.target.value });
+
+    if (!(pincode.trim().length ==6 )) {
+      toast.error("Pincode should be at least 6 characters");
+      return;
+    }
   };
+  
 
   const saveHotel = () => {
     const formData = new FormData();
@@ -89,6 +96,8 @@ const AddHotelForm = () => {
       });
   };
 
+  
+
   return (
     <div>
       <div className="mt-2 d-flex aligns-items-center justify-content-center">
@@ -103,8 +112,10 @@ const AddHotelForm = () => {
             <form className="row g-3">
               <div className="col-md-6 mb-3">
                 <label htmlFor="name" className="form-label">
-                  <b>Hotel Name</b>
+                  <b>Hotel Name <span className="text-danger">*</span></b>
+                  
                 </label>
+               
                 <input
                   type="text"
                   className="form-control"
@@ -112,20 +123,22 @@ const AddHotelForm = () => {
                   name="name"
                   onChange={handleInput}
                   value={hotel.name}
+                  required
                 />
               </div>
 
               <div className="col-md-6 mb-3">
                 <label className="form-label">
-                  <b>Location</b>
+                  <b>Location <span className="text-danger">*</span></b>
                 </label>
 
                 <select
                   name="locationId"
                   onChange={handleInput}
                   className="form-control"
+                  required
                 >
-                  <option value="">Select Location</option>
+                  <option value="">Select Location </option>
 
                   {locations.map((location) => {
                     return (
@@ -137,7 +150,7 @@ const AddHotelForm = () => {
 
               <div className="col-md-6 mb-3">
                 <label htmlFor="description" className="form-label">
-                  <b>Hotel Description</b>
+                  <b>Hotel Description <span className="text-danger">*</span></b>
                 </label>
                 <textarea
                   className="form-control"
@@ -146,19 +159,21 @@ const AddHotelForm = () => {
                   rows="3"
                   onChange={handleInput}
                   value={hotel.description}
+                  required
                 />
               </div>
 
               <div className="col-md-6 mb-3">
                 <label className="form-label">
-                  <b>Hotel Admin</b>
+                  <b> Add Receptionist <span className="text-danger">*</span></b>
                 </label>
                 <select
                   name="userId"
                   onChange={handleInput}
                   className="form-control"
+                  required
                 >
-                  <option value="">Select Hotel Admin</option>
+                  <option value="">Select Hotel Receptionist</option>
 
                   {hotelUsers.map((hotelUser) => {
                     return (
@@ -173,7 +188,7 @@ const AddHotelForm = () => {
 
               <div className="col-md-6 mb-3 mt-1">
                 <label htmlFor="quantity" className="form-label">
-                  <b>Hotel Email</b>
+                  <b>Hotel Email <span className="text-danger">*</span></b>
                 </label>
                 <input
                   type="email"
@@ -182,12 +197,13 @@ const AddHotelForm = () => {
                   name="emailId"
                   onChange={handleInput}
                   value={hotel.emailId}
+                  required
                 />
               </div>
 
               <div className="col-md-6 mb-3 mt-1">
                 <label htmlFor="quantity" className="form-label">
-                  <b>Price Per Day</b>
+                  <b>Price Per Day <span className="text-danger">*</span></b>
                 </label>
                 <input
                   type="number"
@@ -196,12 +212,13 @@ const AddHotelForm = () => {
                   name="pricePerDay"
                   onChange={handleInput}
                   value={hotel.pricePerDay}
+                  required
                 />
               </div>
 
               <div className="col-md-6 mb-3 mt-1">
                 <label htmlFor="totalRoom" className="form-label">
-                  <b>Total Room</b>
+                  <b>Total Room <span className="text-danger">*</span></b>
                 </label>
                 <input
                   type="number"
@@ -210,12 +227,13 @@ const AddHotelForm = () => {
                   name="totalRoom"
                   onChange={handleInput}
                   value={hotel.totalRoom}
+                  required
                 />
               </div>
 
               <div className="col-md-6 mb-3 mt-1">
                 <label htmlFor="street" className="form-label">
-                  <b>Street</b>
+                  <b>Street <span className="text-danger">*</span></b>
                 </label>
                 <input
                   type="text"
@@ -224,12 +242,16 @@ const AddHotelForm = () => {
                   name="street"
                   onChange={handleInput}
                   value={hotel.street}
+                  required
                 />
               </div>
 
               <div className="col-md-6 mb-3">
                 <label htmlFor="pincode" className="form-label">
-                  <b>Pin Code</b>
+                 
+                  <b>
+                    Pin Code<span className="text-danger">*</span>
+                  </b>
                 </label>
                 <input
                   type="number"
@@ -238,12 +260,16 @@ const AddHotelForm = () => {
                   name="pincode"
                   onChange={handleInput}
                   value={hotel.pincode}
+                  pattern="[0-5]{6}"
+                  title="Pin Code must be 6 digits"
+                  required
+                  maxLength={6}
                 />
               </div>
 
               <div className="col-md-6 mb-3">
                 <label htmlFor="image1" className="form-label">
-                  <b> Select Hotel Image 1</b>
+                  <b> Select Hotel Image 1 <span className="text-danger">*</span></b>
                 </label>
                 <input
                   className="form-control"
@@ -251,6 +277,7 @@ const AddHotelForm = () => {
                   id="image1"
                   name="image1"
                   value={hotel.image1}
+                  required
                   onChange={(e) => setSelectedImage1(e.target.files[0])}
                 />
               </div>
@@ -265,6 +292,7 @@ const AddHotelForm = () => {
                   id="image2"
                   name="image2"
                   value={hotel.image2}
+                  required
                   onChange={(e) => setSelectedImage2(e.target.files[0])}
                 />
               </div>
@@ -279,6 +307,7 @@ const AddHotelForm = () => {
                   id="image3"
                   name="image3"
                   value={hotel.image3}
+                  required
                   onChange={(e) => setSelectedImage3(e.target.files[0])}
                 />
               </div>
@@ -292,6 +321,7 @@ const AddHotelForm = () => {
                   Add Hotel
                 </button>
               </div>
+              <a href="/listhotel" class="link-info">List Of All Hotels</a>
             </form>
           </div>
         </div>

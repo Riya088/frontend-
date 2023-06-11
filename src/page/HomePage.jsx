@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import HotelCard from "../HotelComponent/HotelCard";
 import Footer from "./Footer";
-
+import AboutUs from "./AboutUs";
+import ContactUs from "./ContactUs";
 const HomePage = () => {
   const [hotels, setHotels] = useState([]);
   const { locationId } = useParams();
@@ -50,6 +51,7 @@ const HomePage = () => {
   };
 
   return (
+    <div className="margin">
     <div className="container-fluid mb-2">
       <Carousel />
       <div className="mt-2 mb-5">
@@ -69,8 +71,13 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <hr></hr>
+      <AboutUs/>
       <hr />
+      <ContactUs/>
+      <hr/>
       <Footer />
+    </div>
     </div>
   );
 };

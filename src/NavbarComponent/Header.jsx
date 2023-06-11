@@ -4,23 +4,17 @@ import RoleNav from "./RoleNav";
 
 const Header = () => {
   return (
-    <div>
-      <nav className="navbar  navbar-expand-lg custom-bg text-color">
+    <div >
+      <nav className="navbar fixed-top navbar-expand-lg custom-bg text-color">
         <div className="container-fluid text-color">
-          <img
-            src={logo}
-            width="40"
-            height="40"
-            className="d-inline-block align-top"
-            alt=""
-          />
-          <Link to="/" className="navbar-brand">
-            
-            <i>
-              <b className="text-color"> &nbsp; Royal Hotels</b>
-            </i>
-          </Link>
-          <button
+        <div class="logo-container">
+          <ul>
+            <li>
+        <div class="logo-holder logo-6">
+        <Link to="/" className="navbar-brand">
+          <h3>Royal <span>Hotels</span></h3>
+       </Link>
+       <button
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -31,6 +25,12 @@ const Header = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
+      </div>
+      </li>
+      </ul>
+      </div>
+        
+          
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -39,7 +39,7 @@ const Header = () => {
                   className="nav-link active"
                   aria-current="page"
                 >
-                  <b className="text-color">About Us</b>
+                  <h7 className="text-color">About Us</h7>
                 </Link>
               </li>
 
@@ -49,7 +49,7 @@ const Header = () => {
                   className="nav-link active"
                   aria-current="page"
                 >
-                  <b className="text-color">Contact Us</b>
+                  <h7 className="text-color">Contact Us</h7>
                 </Link>
               </li>
             </ul>

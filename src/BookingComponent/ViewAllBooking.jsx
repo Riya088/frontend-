@@ -25,6 +25,7 @@ const ViewAllBooking = () => {
   };
 
   return (
+    <div className="margin">
     <div className="mt-3">
       <div
         className="card form-card ms-2 me-2 mb-5 custom-bg border-color "
@@ -58,6 +59,7 @@ const ViewAllBooking = () => {
                   <th scope="col">Total Day</th>
                   <th scope="col">Booking Status</th>
                   <th scope="col">Total Payable Amount</th>
+                
                 </tr>
               </thead>
               <tbody>
@@ -104,7 +106,6 @@ const ViewAllBooking = () => {
                       <td>
                         <b>{booking.totalRoom}</b>
                       </td>
-
                       <td>
                         <b>{booking.totalDay}</b>
                       </td>
@@ -122,6 +123,7 @@ const ViewAllBooking = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

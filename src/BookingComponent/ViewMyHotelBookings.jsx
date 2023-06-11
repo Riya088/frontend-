@@ -82,6 +82,7 @@ const ViewMyHotelBookings = () => {
   };
 
   return (
+    <div className="margin">
     <div className="mt-3">
       <div
         className="card form-card  mb-5 custom-bg border-color "
@@ -111,6 +112,7 @@ const ViewMyHotelBookings = () => {
                   <th scope="col">Customer Contact</th>
                   <th scope="col">Check In</th>
                   <th scope="col">Check Out</th>
+                  
                   <th scope="col">Total Room</th>
                   <th scope="col">Total Day</th>
                   <th scope="col">Total Payable Amount</th>
@@ -162,10 +164,12 @@ const ViewMyHotelBookings = () => {
                       <td>
                         <b>{booking.checkOut}</b>
                       </td>
+                      
                       <td>
                         <b>{booking.totalRoom}</b>
                       </td>
-
+                      
+                     
                       <td>
                         <b>{booking.totalDay}</b>
                       </td>
@@ -178,7 +182,7 @@ const ViewMyHotelBookings = () => {
 
                       <td>
                         {(() => {
-                          if (booking.status === "Pending") {
+                          if (booking.status === "Approved") {
                             return (
                               <Link
                                 to={`/hotel/verify/booking/${booking.id}`}
@@ -199,6 +203,7 @@ const ViewMyHotelBookings = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

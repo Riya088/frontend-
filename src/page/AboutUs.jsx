@@ -1,4 +1,4 @@
-import carousal_1 from '../images/carousal_1.png';
+import carousal_1 from '../images/carousal_1.jpg';
 const AboutUs = () => {
   return (
     <div className='container'>

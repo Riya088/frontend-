@@ -33,7 +33,10 @@ const UserLoginForm = () => {
           sessionStorage.setItem("active-admin", JSON.stringify(res));
         } else if (res.role === "Customer") {
           sessionStorage.setItem("active-customer", JSON.stringify(res));
-        } else if (res.role === "Hotel") {
+        } 
+        else if (res.role === "Manager") {
+          sessionStorage.setItem("active-manager", JSON.stringify(res));
+        }else if (res.role === "Hotel") {
           sessionStorage.setItem("active-hotel", JSON.stringify(res));
         }
 
@@ -55,7 +58,7 @@ const UserLoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="margin">
       <div className="mt-2 d-flex aligns-items-center justify-content-center">
         <div
           className="card form-card border-color custom-bg"
@@ -77,8 +80,9 @@ const UserLoginForm = () => {
                 >
                   <option value="0">Select Role</option>
                   <option value="Admin"> Admin </option>
-                  <option value="Customer"> Customer </option>
-                  <option value="Hotel"> Manager </option>
+                  <option value="Customer">Customer </option>
+                  <option value="Manager">Manager</option>
+                  <option value="Hotel">Receptionist</option>
                 </select>
               </div>
 
@@ -109,6 +113,14 @@ const UserLoginForm = () => {
                   autoComplete="on"
                 />
               </div>
+              <div class="form-group">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="customControlInline"/>
+                
+								<label class="custom-control-label" for="customControlInline">Remember me</label>
+							</div>
+						</div>
+            <br></br>
               <button
                 type="submit"
                 className="btn bg-color custom-bg-text"
@@ -116,6 +128,14 @@ const UserLoginForm = () => {
               >
                 Login
               </button>
+              <div class="mt-4">
+					<div class="d-flex justify-content-center links">
+						Don't have an account? <a href="" class="ml-2">Sign Up</a>
+					</div>
+					<div class="d-flex justify-content-center links">
+						<a href="#">Forgot your password?</a>
+					</div>
+				</div>
               <ToastContainer />
             </form>
           </div>

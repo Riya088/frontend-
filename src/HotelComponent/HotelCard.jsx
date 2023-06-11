@@ -4,6 +4,7 @@ import HotelCarousel from "./HotelCarousel";
 
 const HotelCard = (hotel) => {
   return (
+    <div >
     <div className="col">
       <div class="card border-color rounded-card card-hover product-card custom-bg h-100">
         <img
@@ -16,15 +17,6 @@ const HotelCard = (hotel) => {
             width: "auto",
           }}
         />
-
-        {/* <HotelCarousel
-      item={{
-        carouselId : hotel.item.image1, 
-        image1 : hotel.item.image1,
-        image2 : hotel.item.image2,
-        image3 : hotel.item.image3,
-      }}
-      /> */}
 
         <div class="card-body text-color">
           <h5 class="card-title d-flex justify-content-between">
@@ -53,6 +45,9 @@ const HotelCard = (hotel) => {
               </span>
             </p>
           </div>
+       <br/>
+        <br/> 
+          <br/>
           <div className="d-flex justify-content-center">
             <Link
               to={`/hotel/${hotel.item.id}/location/${hotel.item.location.id}`}
@@ -63,6 +58,7 @@ const HotelCard = (hotel) => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

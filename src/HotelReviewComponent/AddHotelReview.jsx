@@ -109,6 +109,7 @@ const AddHotelReview = () => {
   };
 
   return (
+    <div >
     <div className="container-fluid mb-5">
       <div class="row">
         <div class="col-sm-2 mt-2"></div>
@@ -193,6 +194,7 @@ const AddHotelReview = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

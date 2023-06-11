@@ -32,6 +32,7 @@ const GetHotelReviews = (hotel) => {
   }, []);
 
   return (
+    <div>
     <div
       class="list-group form-card border-color"
       style={{
@@ -64,6 +65,7 @@ const GetHotelReviews = (hotel) => {
           );
         })}
       </div>
+    </div>
     </div>
   );
 };

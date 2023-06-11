@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
-
+import {Link} from "react-router-dom";
 const ViewMyBooking = () => {
   const [allBookings, setAllBookings] = useState([]);
-
+   
   let user = JSON.parse(sessionStorage.getItem("active-customer"));
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const ViewMyBooking = () => {
   };
 
   return (
+    <div className="margin">
     <div className="mt-3">
       <div
         className="card form-card ms-2 me-2 mb-5 custom-bg border-color "
@@ -60,6 +61,8 @@ const ViewMyBooking = () => {
                   <th scope="col">Total Day</th>
                   <th scope="col">Booking Status</th>
                   <th scope="col">Total Payable Amount</th>
+               
+                  <th scope="col">Payment Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -106,10 +109,10 @@ const ViewMyBooking = () => {
                       <td>
                         <b>{booking.checkOut}</b>
                       </td>
+                      
                       <td>
                         <b>{booking.totalRoom}</b>
                       </td>
-
                       <td>
                         <b>{booking.totalDay}</b>
                       </td>
@@ -119,6 +122,21 @@ const ViewMyBooking = () => {
                       <td>
                         <b>{booking.totalAmount}</b>
                       </td>
+                      
+                     
+                         <td>
+                      {(() => {
+                          if (booking.status === "Cancel") {
+                            return (
+                              <div>
+                                <p><b style={{color:"#ffA500"}}>Refund Successful</b></p>
+                              </div>
+                            );
+                          } 
+                          
+                          
+                          
+                        })()}     </td>
                     </tr>
                   );
                 })}
@@ -127,6 +145,7 @@ const ViewMyBooking = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

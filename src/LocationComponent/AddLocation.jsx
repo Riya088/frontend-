@@ -40,7 +40,7 @@ const AddLocation = () => {
   };
 
   return (
-    <div>
+    <div className="margin">
       <div className="mt-2 d-flex aligns-items-center justify-content-center">
         <div
           className="card form-card border-color custom-bg"
